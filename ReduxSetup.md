@@ -64,15 +64,20 @@ Lets start with only two plane actions and one simple reducer.
 3. Add two action types in action_types
 4. Import action types into actions export two actions. This steps seems redundant but using separate action types file is a best practice and recommended approach. Becuase consider if you just set the action's type property of string in action file and if you want to update it tomorrow, then you need to go through all the reducers that uses that action and update it. Thus instead create a golden copy of action types and you can use them everywhere and modify it at single place.
 5. Now lets create reducer, ./src/store/reducers/reducer1.js. The reducer will list all the action types in switch case and return new state.
-6. At this point we have set up the actions and the reducer. Now lets integrate our react app with the redux store. This must be done at ./src/index.js file so that the redux store is available globally. - Include all dependencies,
-   npm i redux
-   npm i react-redux
-   - Create redux store using createStore function of redux and pass it reducer1 function. - Update index component by enclosing your <App> within <Provider> tag. - By wrapping your App in the Provider component we make sure that redux store is available globally for every component.
-     After this our Redux setup is done
+6. At this point we have set up the actions and the reducer. Now lets integrate our react app with the redux store. This must be done at ./src/index.js file so that the redux store is available globally.
+
+- Include all dependencies,
+  npm i redux
+  npm i react-redux
+- Create redux store using createStore function of redux and pass it reducer1 function.
+- Update index component by enclosing your <App> within <Provider> tag.
+- By wrapping your App in the Provider component we make sure that redux store is available globally for every component.
+  After this our Redux store setup is done
+
 7. Now lets setup the react's redux container, which means hook up the react component to redux using mapstatetoprops and mapdispatchtoprops function.
 
    - create a simple component in your app at ./src/containers/component1. Notice the naming convention, in react class components are called containers and functional components are called functional components. We don't need to hook up functional component to redux as they are stand alone components and not aware of the redux state[write more about it.]
-   - import dependencies ie both actions
+   - import actions
    - set up three buttons for
      getState -> To retrieve current redux state
      dispatch action 1 -> To dispatch action 1
@@ -108,7 +113,7 @@ Lets start with only two plane actions and one simple reducer.
   If you click on the Dispatch user input button now, the user_input action will be dispatched with payload which contains user input. At the reducer side the state will be updated and the new variable user_text in the state will contain the user input. After which your component will be automatically re rendered and in the mapstatetoprop function the dispatched user input will be assigned to prop which then showed on the UI.
   -------------------------------------------------commit to git---------------------------------------------
 
-  We have completed the flow of adding redux state to your APP, then using the actions to update the state using reducers. This is done through single reducer, however in complex application you have various reducers for various purposes. For eg. You will have Auth reducer that will contain state representing user name, user's logged in status, etc and other reducer like Preference reducer that contain state representing logged in user's preference like his preffered font style, background color etc. So in react you don't create separate reducer per component rather create a reducer per state functionality. And then you combine these reducers to have single state.
+  We have completed the flow of adding redux state to your APP, using the actions to update the state using reducers. This is done through single reducer, however in complex application you have various reducers for various purposes. For eg. You will have Auth reducer that will contain state representing user name, user's logged in status, etc and other reducer like Preference reducer that contain state representing logged in user's preference like his preffered font style, background color etc. So in react you don't create separate reducer per component rather create a reducer per state functionality. And then you combine these reducers to have single state.
   To illustrate this we will create a rootReducer which is combination of reducer1 which contains single state property ie stateProp1 & user_reducer which contains user_text.
 
 11. Add Root reducer
