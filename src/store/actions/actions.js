@@ -7,3 +7,23 @@ export const SUCCESS = {
 export const FAILURE = {
   type: ACTION_TYPES.FAILURE,
 };
+
+// Action Creators as with just action object you can not pass payload to reducers
+export const success = () => {
+  return {
+    type: ACTION_TYPES.SUCCESS,
+  };
+};
+
+export const failure = () => {
+  return {
+    type: ACTION_TYPES.FAILURE,
+  };
+};
+
+export const user_input = (text) => {
+  return {
+    type: ACTION_TYPES.USER_INPUT,
+    payload: text,
+  };
+};

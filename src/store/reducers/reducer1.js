@@ -4,6 +4,7 @@ import * as ACTION_TYPES from "../actions/action_types";
 // create initial state. This is your actual redux state.
 const initialState = {
   stateProp1: false,
+  user_text: "",
 };
 
 // create reducer function.
@@ -15,6 +16,8 @@ const reducer1 = (state = initialState, action) => {
       return { ...state, stateProp1: true };
     case ACTION_TYPES.FAILURE:
       return { ...state, stateProp1: false };
+    case ACTION_TYPES.USER_INPUT:
+      return { ...state, user_text: action.payload };
     default:
       return state;
   }

@@ -70,16 +70,40 @@ Lets start with only two plane actions and one simple reducer.
    - Create redux store using createStore function of redux and pass it reducer1 function. - Update index component by enclosing your <App> within <Provider> tag. - By wrapping your App in the Provider component we make sure that redux store is available globally for every component.
      After this our Redux setup is done
 7. Now lets setup the react's redux container, which means hook up the react component to redux using mapstatetoprops and mapdispatchtoprops function.
+
    - create a simple component in your app at ./src/containers/component1. Notice the naming convention, in react class components are called containers and functional components are called functional components. We don't need to hook up functional component to redux as they are stand alone components and not aware of the redux state[write more about it.]
-   - import dependencies ie both actions and action_types
+   - import dependencies ie both actions
    - set up three buttons for
      getState -> To retrieve current redux state
      dispatch action 1 -> To dispatch action 1
      dispatch action 2 -> To dispatch action 2
    - at the bottom we will set up two functions, these two functions and their parameters are reserved words so we can rename them or interchange them.
-     mapStateToProps(state) - Essentially, how to get state from redux. - Returns the state and maps it to the props. - To use the state in render method of react component use this.props.[property_in_redux_state]
-     mapDispatchToProps(dispatch) - This is similar to setState method of react, differnce is setState is usefull only for the component it is used. While this function modifies the state globally. It is quite common to use setState and this function in complex react app. - Similar to mapStateToProps it returns key value pair the name of keys are upto us, the values are the arrow functions that calls the dispatch method with an action, which will eventually pass value of action as argument to reducers - To use action in the render method we use this.props.[action_name] - The actions are dispatched automatically in async way and run through the reducer. In order to maintain the order of actions dispatched use batch, refer StitchX. - The reducer then update the value of the state and the component is re rendered automatically.  
+     mapStateToProps(state)
+   - Essentially, how to get state from redux.
+   - Returns the state and maps it to the props.
+   - To use the state in render method of react component use this.props.[property_in_redux_state]
+     mapDispatchToProps(dispatch)
+   - This is similar to setState method of react, differnce is setState is usefull only for the component it is used. While this function modifies the state globally. It is quite common to use setState and this function in complex react app.
+   - Similar to mapStateToProps it returns key value pair the name of keys are upto us, the values are the arrow functions that calls the dispatch method with an action, which will eventually pass value of action as argument to reducers
+   - To use action in the render method we use this.props.[action_name]
+   - The actions are dispatched automatically in async way and run through the reducer. In order to maintain the order of actions dispatched use batch, refer StitchX.
+   - The reducer then update the value of the state and the component is re rendered automatically.  
      we attach these function to component using connect function of redux
    - Lets finish up our mapStateToProps(state) & mapDispatchToProps(dispatch) functions.
    - Test your application
+
      ----------------------------------------commit to git---------------------------------------------
+
+8. Add action creators for action. These are nothing but simple functions that returns action object. It will usefull when you need to pass payload as well from your action to reducer. Check out the file ./src/store/actions/action.js
+9. Add the action creators to mapDispatchToProps and call them using two new buttons.
+10. Since we are equiped with action creator, lets pass data to reducers
+
+- Create another action type as USER_INPUT in ./src/store/actions_types.js
+- Create an action creator user_input() in ./src/store/actions.js. This will not be same as other action creators as it will have payload as well.
+- Update the reducer to handle new action. In here, we need to update the intialState to incorporate our payload by adding new variable user_text to state.
+- Update the ./src/containers/Container1.js and include new method to dispatch user_input() action, to simulate user input add Quote library and use getRandomQuote() method.
+- Map the new state variable user_text in mapStateToProps
+- Add a button(Dispatch user input) to trigger user_input() action
+- Add a div that will show user_text prop.
+  If you click on the Dispatch user input button now, the user_input action will be dispatched with payload which contains user input. At the reducer side the state will be updated and the new variable user_text in the state will contain the user input. After which your component will be automatically re rendered and in the mapstatetoprop function the dispatched user input will be assigned to prop which then showed on the UI.
+  -------------------------------------------------commit to git---------------------------------------------
