@@ -37,8 +37,8 @@ class Container1 extends Component {
 
 function mapStateToProps(state) {
   return {
-    stateProp1: state.stateProp1,
-    user_text: state.user_text,
+    stateProp1: state.reducer1.stateProp1,
+    user_text: state.user_reducer.user_text,
   };
 }
 

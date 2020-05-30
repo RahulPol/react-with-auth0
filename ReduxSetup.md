@@ -107,3 +107,17 @@ Lets start with only two plane actions and one simple reducer.
 - Add a div that will show user_text prop.
   If you click on the Dispatch user input button now, the user_input action will be dispatched with payload which contains user input. At the reducer side the state will be updated and the new variable user_text in the state will contain the user input. After which your component will be automatically re rendered and in the mapstatetoprop function the dispatched user input will be assigned to prop which then showed on the UI.
   -------------------------------------------------commit to git---------------------------------------------
+
+  We have completed the flow of adding redux state to your APP, then using the actions to update the state using reducers. This is done through single reducer, however in complex application you have various reducers for various purposes. For eg. You will have Auth reducer that will contain state representing user name, user's logged in status, etc and other reducer like Preference reducer that contain state representing logged in user's preference like his preffered font style, background color etc. So in react you don't create separate reducer per component rather create a reducer per state functionality. And then you combine these reducers to have single state.
+  To illustrate this we will create a rootReducer which is combination of reducer1 which contains single state property ie stateProp1 & user_reducer which contains user_text.
+
+11. Add Root reducer
+
+- Segregate the reducer1 into two reducers ie ./src/store/reducers/reducer1 & ./src/store/reducers/user_reducer
+- Create another reducer in ./src/store/reducers/index.js, the name index.js is intentional cause we don't need to specify it in import statement.
+- Use redux's combineReducer function to combine these reducers and export the root reducer. This root reducer now contains all your apps reducers and combine state of it.
+- Update ./src/index.js to include the root reducer instead of reducer1, notice the import statement, and create the store using rootReducer. Now your app has a root reducer which is combination of several other reducers and contains single state.
+- Last step is to update your container1 component. Since we are using combined reducer the mapstatetoprops should use specific reducer to map state to your props.
+
+This completes the redux setup in your react app.
+-----------------------------------------------commit to git------------------------------------------------
